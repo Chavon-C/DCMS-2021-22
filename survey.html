@@ -1,0 +1,1058 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.5.57">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>The Relationship Between Historic Site Visits and Life Satisfaction: A Survey-Weighted Analysis</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="survey_files/libs/clipboard/clipboard.min.js"></script>
+<script src="survey_files/libs/quarto-html/quarto.js"></script>
+<script src="survey_files/libs/quarto-html/popper.min.js"></script>
+<script src="survey_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="survey_files/libs/quarto-html/anchor.min.js"></script>
+<link href="survey_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="survey_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="survey_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="survey_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="survey_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="survey_files/libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="survey_files/libs/lightable-0.0.1/lightable.css" rel="stylesheet">
+
+
+</head>
+
+<body class="fullcontent">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">The Relationship Between Historic Site Visits and Life Satisfaction: A Survey-Weighted Analysis</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="introduction" class="level3">
+<h3 class="anchored" data-anchor-id="introduction">Introduction</h3>
+<p>This report uses the 2021-2022 DCMS (department for digital, culture, media and sport) survey data to examine the relationship between self-reported life satisfaction and frequency of visiting a historic city or town, whilst exploring whether different age groups and financial situations impact the strength and direction of this association.</p>
+<hr>
+</section>
+<section id="background" class="level3">
+<h3 class="anchored" data-anchor-id="background">Background</h3>
+<p>This survey was conducted via an online and paper methodology using Address Based Online Surveying (ABOS). Furthermore, the survey uses a random stratified sample design of addresses drawn from the Royal Mail’s postcode address file. 33,589 people participated (adults aged 16+ in England).</p>
+<p>The final dataset has a 3 step weighting process which compensates for differences in sampling and response probability. First, an address design weight was created, secondly, the expected number of responses per address was modelled as a function of data available at the neighbourhood and address levels. Finally, the products of the first 2 steps were used to calibrate the responding sample to the Labour Force Survey (LFS) of August-October 2021. The sum of these weights are equal to the population of England aged 16+ and an additional standardised weight was produced and scaled so the weights sum to the respondent sample size. Additionally, because some questions were only available to the online survey, weights were also produced for the online respondents. It is important to note that because weighting only corrects for observed bias, there is a risk of unobserved bias.</p>
+<p>For my current report, I will use the ordinal variables of <strong>life satisfaction</strong> (scale of 0-10), with 0 being the lowest life satisfaction score, <strong>age group</strong> (5 bands), <strong>financial situation</strong> (5 levels from ‘living comfortably’ to ‘finding it very difficult’), <strong>frequency of visit</strong> (5 levels from ‘at least once a week’ to ‘once in the last 12 months’). I will also use a nominal variable which is whether they’ve <strong>visited in last 12 months</strong> (yes or no).</p>
+<p>A complete case sample was used in this report. First off, there were multiple responses for each variable such as ‘Multi-selected for a single response’, ‘Not answered but should have’, ‘Not applicable’, ‘Don’t know’ and ‘Prefer not to say’. These values were recoded as NA and removed from the dataset. Below is a summary table of the complete case sample:</p>
+<div class="cell">
+<div class="cell-output-display">
+<table class="table table-striped table-condensed caption-top table-sm small" data-quarto-postprocess="true">
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th">Variables</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">**N = 29,610**</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">__Life Satisfaction__</td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">0</td>
+<td style="text-align: center;">337 (1.1%)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">1</td>
+<td style="text-align: center;">275 (0.9%)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2</td>
+<td style="text-align: center;">603 (2.0%)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">3</td>
+<td style="text-align: center;">944 (3.2%)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">4</td>
+<td style="text-align: center;">1,085 (3.7%)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">5</td>
+<td style="text-align: center;">2,979 (10%)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">6</td>
+<td style="text-align: center;">3,085 (10%)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">7</td>
+<td style="text-align: center;">5,788 (20%)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">8</td>
+<td style="text-align: center;">7,887 (27%)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">9</td>
+<td style="text-align: center;">3,712 (13%)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">10</td>
+<td style="text-align: center;">2,915 (9.8%)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">__Age Group__</td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">16-24</td>
+<td style="text-align: center;">2,432 (8.2%)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">25-44</td>
+<td style="text-align: center;">9,186 (31%)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">45-64</td>
+<td style="text-align: center;">9,543 (32%)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">65-74</td>
+<td style="text-align: center;">5,081 (17%)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">75+</td>
+<td style="text-align: center;">3,368 (11%)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">__Financial Situation__</td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Living comfortably</td>
+<td style="text-align: center;">8,164 (28%)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Doing alright</td>
+<td style="text-align: center;">11,815 (40%)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Just about getting by</td>
+<td style="text-align: center;">6,286 (21%)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Finding it quite difficult</td>
+<td style="text-align: center;">2,151 (7.3%)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Finding it very difficult</td>
+<td style="text-align: center;">1,194 (4.0%)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">__Visited in last 12 months__</td>
+<td style="text-align: center;">12,553 (42%)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">__Frequency of visit__</td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Not Applicable</td>
+<td style="text-align: center;">17,057 (58%)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">At least once a week</td>
+<td style="text-align: center;">441 (1.5%)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Less often than once a week but at least once a month</td>
+<td style="text-align: center;">1,435 (4.8%)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Less often than once a month but at least 3 or 4 times a year</td>
+<td style="text-align: center;">4,752 (16%)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Twice in the last 12 months</td>
+<td style="text-align: center;">3,521 (12%)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Once in the last 12 months</td>
+<td style="text-align: center;">2,404 (8.1%)</td>
+</tr>
+</tbody>
+</table>
+
+
+</div>
+</div>
+<p>For the variable ‘Visited in last 12 months’, the table shows those who have answered ‘yes’, with 42%. Those who answered ‘no’ is the same as those who answered ‘not’ applicable in the frequency of visits.</p>
+<p>After creating a survey design object, taking into account that the sample is divided into strata and uses a simple design alongside weighting, a generalised linear model taking into account survey design was created.</p>
+</section>
+<section id="interpretation" class="level3">
+<h3 class="anchored" data-anchor-id="interpretation">Interpretation</h3>
+<div class="cell">
+<div class="cell-output-display">
+<table class="table table-striped table-condensed caption-top table-sm small" data-quarto-postprocess="true">
+<caption>Survey-weighted Regression Results for frequency of visiting a historic town/city</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th"></th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Estimate</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Std.Error</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">t value</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">P value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">(Intercept)</td>
+<td style="text-align: right;">7.545</td>
+<td style="text-align: right;">0.072</td>
+<td style="text-align: right;">104.848</td>
+<td style="text-align: right;">0.000</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">`Age Group`25-44</td>
+<td style="text-align: right;">0.342</td>
+<td style="text-align: right;">0.070</td>
+<td style="text-align: right;">4.869</td>
+<td style="text-align: right;">0.000</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">`Age Group`45-64</td>
+<td style="text-align: right;">0.216</td>
+<td style="text-align: right;">0.071</td>
+<td style="text-align: right;">3.048</td>
+<td style="text-align: right;">0.002</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">`Age Group`65-74</td>
+<td style="text-align: right;">0.383</td>
+<td style="text-align: right;">0.076</td>
+<td style="text-align: right;">5.046</td>
+<td style="text-align: right;">0.000</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">`Age Group`75+</td>
+<td style="text-align: right;">0.074</td>
+<td style="text-align: right;">0.084</td>
+<td style="text-align: right;">0.879</td>
+<td style="text-align: right;">0.379</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">`Frequency of visit`At least once a week</td>
+<td style="text-align: right;">0.412</td>
+<td style="text-align: right;">0.424</td>
+<td style="text-align: right;">0.971</td>
+<td style="text-align: right;">0.332</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">`Frequency of visit`Less often than once a week but at least once a month</td>
+<td style="text-align: right;">0.107</td>
+<td style="text-align: right;">0.226</td>
+<td style="text-align: right;">0.476</td>
+<td style="text-align: right;">0.634</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">`Frequency of visit`Less often than once a month but at least 3 or 4 times a year</td>
+<td style="text-align: right;">0.101</td>
+<td style="text-align: right;">0.131</td>
+<td style="text-align: right;">0.772</td>
+<td style="text-align: right;">0.440</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">`Frequency of visit`Twice in the last 12 months</td>
+<td style="text-align: right;">-0.047</td>
+<td style="text-align: right;">0.165</td>
+<td style="text-align: right;">-0.286</td>
+<td style="text-align: right;">0.775</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">`Frequency of visit`Once in the last 12 months</td>
+<td style="text-align: right;">-0.042</td>
+<td style="text-align: right;">0.181</td>
+<td style="text-align: right;">-0.230</td>
+<td style="text-align: right;">0.818</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">`Financial Situation`Doing alright</td>
+<td style="text-align: right;">-0.526</td>
+<td style="text-align: right;">0.043</td>
+<td style="text-align: right;">-12.119</td>
+<td style="text-align: right;">0.000</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">`Financial Situation`Just about getting by</td>
+<td style="text-align: right;">-1.371</td>
+<td style="text-align: right;">0.051</td>
+<td style="text-align: right;">-26.803</td>
+<td style="text-align: right;">0.000</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">`Financial Situation`Finding it quite difficult</td>
+<td style="text-align: right;">-2.153</td>
+<td style="text-align: right;">0.075</td>
+<td style="text-align: right;">-28.673</td>
+<td style="text-align: right;">0.000</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">`Financial Situation`Finding it very difficult</td>
+<td style="text-align: right;">-3.588</td>
+<td style="text-align: right;">0.107</td>
+<td style="text-align: right;">-33.543</td>
+<td style="text-align: right;">0.000</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">`Age Group`25-44:`Frequency of visit`At least once a week</td>
+<td style="text-align: right;">-0.344</td>
+<td style="text-align: right;">0.434</td>
+<td style="text-align: right;">-0.792</td>
+<td style="text-align: right;">0.428</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">`Age Group`45-64:`Frequency of visit`At least once a week</td>
+<td style="text-align: right;">-0.040</td>
+<td style="text-align: right;">0.432</td>
+<td style="text-align: right;">-0.092</td>
+<td style="text-align: right;">0.927</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">`Age Group`65-74:`Frequency of visit`At least once a week</td>
+<td style="text-align: right;">-0.358</td>
+<td style="text-align: right;">0.465</td>
+<td style="text-align: right;">-0.769</td>
+<td style="text-align: right;">0.442</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">`Age Group`75+:`Frequency of visit`At least once a week</td>
+<td style="text-align: right;">0.103</td>
+<td style="text-align: right;">0.500</td>
+<td style="text-align: right;">0.205</td>
+<td style="text-align: right;">0.837</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">`Age Group`25-44:`Frequency of visit`Less often than once a week but at least once a month</td>
+<td style="text-align: right;">-0.332</td>
+<td style="text-align: right;">0.234</td>
+<td style="text-align: right;">-1.420</td>
+<td style="text-align: right;">0.156</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">`Age Group`45-64:`Frequency of visit`Less often than once a week but at least once a month</td>
+<td style="text-align: right;">0.071</td>
+<td style="text-align: right;">0.226</td>
+<td style="text-align: right;">0.313</td>
+<td style="text-align: right;">0.754</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">`Age Group`65-74:`Frequency of visit`Less often than once a week but at least once a month</td>
+<td style="text-align: right;">0.021</td>
+<td style="text-align: right;">0.230</td>
+<td style="text-align: right;">0.089</td>
+<td style="text-align: right;">0.929</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">`Age Group`75+:`Frequency of visit`Less often than once a week but at least once a month</td>
+<td style="text-align: right;">0.234</td>
+<td style="text-align: right;">0.278</td>
+<td style="text-align: right;">0.841</td>
+<td style="text-align: right;">0.400</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">`Age Group`25-44:`Frequency of visit`Less often than once a month but at least 3 or 4 times a year</td>
+<td style="text-align: right;">-0.306</td>
+<td style="text-align: right;">0.133</td>
+<td style="text-align: right;">-2.295</td>
+<td style="text-align: right;">0.022</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">`Age Group`45-64:`Frequency of visit`Less often than once a month but at least 3 or 4 times a year</td>
+<td style="text-align: right;">0.091</td>
+<td style="text-align: right;">0.132</td>
+<td style="text-align: right;">0.692</td>
+<td style="text-align: right;">0.489</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">`Age Group`65-74:`Frequency of visit`Less often than once a month but at least 3 or 4 times a year</td>
+<td style="text-align: right;">0.205</td>
+<td style="text-align: right;">0.140</td>
+<td style="text-align: right;">1.460</td>
+<td style="text-align: right;">0.144</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">`Age Group`75+:`Frequency of visit`Less often than once a month but at least 3 or 4 times a year</td>
+<td style="text-align: right;">0.424</td>
+<td style="text-align: right;">0.160</td>
+<td style="text-align: right;">2.656</td>
+<td style="text-align: right;">0.008</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">`Age Group`25-44:`Frequency of visit`Twice in the last 12 months</td>
+<td style="text-align: right;">-0.162</td>
+<td style="text-align: right;">0.169</td>
+<td style="text-align: right;">-0.961</td>
+<td style="text-align: right;">0.337</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">`Age Group`45-64:`Frequency of visit`Twice in the last 12 months</td>
+<td style="text-align: right;">0.206</td>
+<td style="text-align: right;">0.167</td>
+<td style="text-align: right;">1.230</td>
+<td style="text-align: right;">0.219</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">`Age Group`65-74:`Frequency of visit`Twice in the last 12 months</td>
+<td style="text-align: right;">0.197</td>
+<td style="text-align: right;">0.175</td>
+<td style="text-align: right;">1.127</td>
+<td style="text-align: right;">0.260</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">`Age Group`75+:`Frequency of visit`Twice in the last 12 months</td>
+<td style="text-align: right;">0.766</td>
+<td style="text-align: right;">0.189</td>
+<td style="text-align: right;">4.060</td>
+<td style="text-align: right;">0.000</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">`Age Group`25-44:`Frequency of visit`Once in the last 12 months</td>
+<td style="text-align: right;">0.110</td>
+<td style="text-align: right;">0.185</td>
+<td style="text-align: right;">0.595</td>
+<td style="text-align: right;">0.552</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">`Age Group`45-64:`Frequency of visit`Once in the last 12 months</td>
+<td style="text-align: right;">0.075</td>
+<td style="text-align: right;">0.186</td>
+<td style="text-align: right;">0.405</td>
+<td style="text-align: right;">0.685</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">`Age Group`65-74:`Frequency of visit`Once in the last 12 months</td>
+<td style="text-align: right;">0.278</td>
+<td style="text-align: right;">0.194</td>
+<td style="text-align: right;">1.429</td>
+<td style="text-align: right;">0.153</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">`Age Group`75+:`Frequency of visit`Once in the last 12 months</td>
+<td style="text-align: right;">0.503</td>
+<td style="text-align: right;">0.220</td>
+<td style="text-align: right;">2.286</td>
+<td style="text-align: right;">0.022</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">`Frequency of visit`At least once a week:`Financial Situation`Doing alright</td>
+<td style="text-align: right;">-0.288</td>
+<td style="text-align: right;">0.235</td>
+<td style="text-align: right;">-1.226</td>
+<td style="text-align: right;">0.220</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">`Frequency of visit`Less often than once a week but at least once a month:`Financial Situation`Doing alright</td>
+<td style="text-align: right;">0.037</td>
+<td style="text-align: right;">0.130</td>
+<td style="text-align: right;">0.284</td>
+<td style="text-align: right;">0.776</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">`Frequency of visit`Less often than once a month but at least 3 or 4 times a year:`Financial Situation`Doing alright</td>
+<td style="text-align: right;">0.040</td>
+<td style="text-align: right;">0.069</td>
+<td style="text-align: right;">0.589</td>
+<td style="text-align: right;">0.556</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">`Frequency of visit`Twice in the last 12 months:`Financial Situation`Doing alright</td>
+<td style="text-align: right;">0.019</td>
+<td style="text-align: right;">0.079</td>
+<td style="text-align: right;">0.243</td>
+<td style="text-align: right;">0.808</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">`Frequency of visit`Once in the last 12 months:`Financial Situation`Doing alright</td>
+<td style="text-align: right;">-0.112</td>
+<td style="text-align: right;">0.099</td>
+<td style="text-align: right;">-1.131</td>
+<td style="text-align: right;">0.258</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">`Frequency of visit`At least once a week:`Financial Situation`Just about getting by</td>
+<td style="text-align: right;">-0.290</td>
+<td style="text-align: right;">0.284</td>
+<td style="text-align: right;">-1.019</td>
+<td style="text-align: right;">0.308</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">`Frequency of visit`Less often than once a week but at least once a month:`Financial Situation`Just about getting by</td>
+<td style="text-align: right;">0.453</td>
+<td style="text-align: right;">0.166</td>
+<td style="text-align: right;">2.736</td>
+<td style="text-align: right;">0.006</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">`Frequency of visit`Less often than once a month but at least 3 or 4 times a year:`Financial Situation`Just about getting by</td>
+<td style="text-align: right;">0.034</td>
+<td style="text-align: right;">0.095</td>
+<td style="text-align: right;">0.356</td>
+<td style="text-align: right;">0.722</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">`Frequency of visit`Twice in the last 12 months:`Financial Situation`Just about getting by</td>
+<td style="text-align: right;">0.155</td>
+<td style="text-align: right;">0.108</td>
+<td style="text-align: right;">1.432</td>
+<td style="text-align: right;">0.152</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">`Frequency of visit`Once in the last 12 months:`Financial Situation`Just about getting by</td>
+<td style="text-align: right;">-0.008</td>
+<td style="text-align: right;">0.131</td>
+<td style="text-align: right;">-0.059</td>
+<td style="text-align: right;">0.953</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">`Frequency of visit`At least once a week:`Financial Situation`Finding it quite difficult</td>
+<td style="text-align: right;">-0.099</td>
+<td style="text-align: right;">0.481</td>
+<td style="text-align: right;">-0.206</td>
+<td style="text-align: right;">0.837</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">`Frequency of visit`Less often than once a week but at least once a month:`Financial Situation`Finding it quite difficult</td>
+<td style="text-align: right;">0.528</td>
+<td style="text-align: right;">0.256</td>
+<td style="text-align: right;">2.060</td>
+<td style="text-align: right;">0.039</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">`Frequency of visit`Less often than once a month but at least 3 or 4 times a year:`Financial Situation`Finding it quite difficult</td>
+<td style="text-align: right;">0.200</td>
+<td style="text-align: right;">0.177</td>
+<td style="text-align: right;">1.127</td>
+<td style="text-align: right;">0.260</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">`Frequency of visit`Twice in the last 12 months:`Financial Situation`Finding it quite difficult</td>
+<td style="text-align: right;">0.075</td>
+<td style="text-align: right;">0.215</td>
+<td style="text-align: right;">0.349</td>
+<td style="text-align: right;">0.727</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">`Frequency of visit`Once in the last 12 months:`Financial Situation`Finding it quite difficult</td>
+<td style="text-align: right;">0.368</td>
+<td style="text-align: right;">0.207</td>
+<td style="text-align: right;">1.778</td>
+<td style="text-align: right;">0.075</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">`Frequency of visit`At least once a week:`Financial Situation`Finding it very difficult</td>
+<td style="text-align: right;">0.684</td>
+<td style="text-align: right;">0.717</td>
+<td style="text-align: right;">0.953</td>
+<td style="text-align: right;">0.341</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">`Frequency of visit`Less often than once a week but at least once a month:`Financial Situation`Finding it very difficult</td>
+<td style="text-align: right;">0.057</td>
+<td style="text-align: right;">0.384</td>
+<td style="text-align: right;">0.148</td>
+<td style="text-align: right;">0.882</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">`Frequency of visit`Less often than once a month but at least 3 or 4 times a year:`Financial Situation`Finding it very difficult</td>
+<td style="text-align: right;">-0.415</td>
+<td style="text-align: right;">0.290</td>
+<td style="text-align: right;">-1.427</td>
+<td style="text-align: right;">0.153</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">`Frequency of visit`Twice in the last 12 months:`Financial Situation`Finding it very difficult</td>
+<td style="text-align: right;">0.072</td>
+<td style="text-align: right;">0.365</td>
+<td style="text-align: right;">0.198</td>
+<td style="text-align: right;">0.843</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">`Frequency of visit`Once in the last 12 months:`Financial Situation`Finding it very difficult</td>
+<td style="text-align: right;">0.716</td>
+<td style="text-align: right;">0.377</td>
+<td style="text-align: right;">1.903</td>
+<td style="text-align: right;">0.057</td>
+</tr>
+</tbody>
+</table>
+
+
+</div>
+</div>
+<p>The model’s results indicate that younger age groups (25–44, 45–64, and 65–74) report significantly higher life satisfaction compared to the reference category (16–24). However, for those aged 75+, the difference is not statistically significant.</p>
+<p>Financial situation plays a big role in life satisfaction. Compared to individuals who are financially comfortable (the reference category), those who are ‘just about getting by’, ‘finding it quite difficult’, or ‘finding it very difficult’ report significantly lower life satisfaction. The size of the negative estimates increases with financial difficulty, suggesting a strong negative relationship between financial hardship and life satisfaction.</p>
+<p>While the main effects of frequency of visits to historic towns/cities are not significant on their own, interactions between age group and visit frequency reveal some notable effects. In particular, those aged 75+ who visit historic towns/cities less often than once a month but at least 3 or 4 times a year, twice in the last 12 months, or once in the last 12 months report significantly higher life satisfaction compared to their counterparts who do not visit as frequently. Similarly, for individuals who are “just about getting by” or “finding it quite difficult,” visiting at least once a month is associated with significantly higher life satisfaction.</p>
+<p>This suggests that the impact of visiting historic towns/cities on life satisfaction depends on both age and financial situation, meaning that certain subgroups may benefit more from these visits than others.</p>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

@@ -1,0 +1,118 @@
+---
+title: "The Relationship Between Historic Site Visits and Life Satisfaction: A Survey-Weighted Analysis"
+format: html
+editor: visual
+echo: FALSE
+---
+
+### Introduction
+
+This report uses the 2021-2022 DCMS (department for digital, culture, media and sport) survey data to examine the relationship between self-reported life satisfaction and frequency of visiting a historic city or town, whilst exploring whether different age groups and financial situations impact the strength and direction of this association.
+
+------------------------------------------------------------------------
+
+### Background
+
+This survey was conducted via an online and paper methodology using Address Based Online Surveying (ABOS). Furthermore, the survey uses a random stratified sample design of addresses drawn from the Royal Mail’s postcode address file. 33,589 people participated (adults aged 16+ in England).
+
+The final dataset has a 3 step weighting process which compensates for differences in sampling and response probability. First, an address design weight was created, secondly, the expected number of responses per address was modelled as a function of data available at the neighbourhood and address levels. Finally, the products of the first 2 steps were used to calibrate the responding sample to the Labour Force Survey (LFS) of August-October 2021. The sum of these weights are equal to the population of England aged 16+ and an additional standardised weight was produced and scaled so the weights sum to the respondent sample size. Additionally, because some questions were only available to the online survey, weights were also produced for the online respondents. It is important to note that because weighting only corrects for observed bias, there is a risk of unobserved bias.
+
+For my current report, I will use the ordinal variables of **life satisfaction** (scale of 0-10), with 0 being the lowest life satisfaction score, **age group** (5 bands), **financial situation** (5 levels from ‘living comfortably’ to ‘finding it very difficult’), **frequency of visit** (5 levels from ‘at least once a week’ to ‘once in the last 12 months’). I will also use a nominal variable which is whether they’ve **visited in last 12 months** (yes or no).
+
+```{r}
+pacman::p_load(haven, tidyverse, purrr, forcats, dplyr, survey, psych, gtsummary, kableExtra, car)
+
+
+DCMS<-read_dta("participation_2021-22_annual_data_open.dta")
+
+DCMS<-select(DCMS,c('WELLB1','AGESHORT'
+                    ,'FINHARD' 
+                    ,'CHERVIS12_001','CFREHER12_a'
+                    ,'finalweight','MasterStratum2'))
+
+
+#function to change "multi selected", "not answered", "not applicable" to NA; keeping "prefer not to say"
+miss <- function(x) {
+  x[x <= -2] <- NA
+  x
+}
+
+#function to change variables into factors
+fac <- function(x) as_factor(x)
+
+#function to drop levels
+d_lvl <- function(x) droplevels(x)
+
+#stating which variables to impute for function
+cols_to_impute <- c("WELLB1", "AGESHORT", "FINHARD", "CHERVIS12_001")
+
+#removing "don't know"
+DCMS$CFREHER12_a[DCMS$CFREHER12_a == 999] <- NA
+DCMS$CFREHER12_a[DCMS$CFREHER12_a<=-4]<-NA
+
+#changing missing responses to NA
+DCMS[cols_to_impute] <- map(DCMS[cols_to_impute], miss)
+
+#changing to factors
+DCMS[cols_to_impute] <- map(DCMS[cols_to_impute], fac)
+DCMS$CFREHER12_a<-fac(DCMS$CFREHER12_a)
+
+#removing all rows with NA
+DCMS <- DCMS[complete.cases(DCMS), ]
+
+#dropping levels
+DCMS[cols_to_impute] <- map(DCMS[cols_to_impute], d_lvl)
+DCMS$CFREHER12_a<-d_lvl(DCMS$CFREHER12_a)
+
+#renaming columns
+DCMS<-DCMS%>%rename("Life Satisfaction"= WELLB1, "Age Group"= AGESHORT, "Financial Situation"=FINHARD,
+                    "Visited in last 12 months"=CHERVIS12_001,
+                    "Frequency of visit"=CFREHER12_a)
+
+```
+
+A complete case sample was used in this report. First off, there were multiple responses for each variable such as ‘Multi-selected for a single response’, ‘Not answered but should have’, ‘Not applicable’, ‘Don’t know’ and 'Prefer not to say'. These values were recoded as NA and removed from the dataset. Below is a summary table of the complete case sample:
+
+```{r}
+smpl<-tbl_summary(DCMS, include = c("Life Satisfaction","Age Group","Financial Situation","Visited in last 12 months","Frequency of visit"))%>%bold_labels()%>%modify_header(label='Variables')%>%
+  as_kable() %>%
+  kable_styling(font_size = 12, bootstrap_options = c("striped", "condensed"))
+
+smpl
+```
+
+For the variable 'Visited in last 12 months', the table shows those who have answered 'yes', with 42%. Those who answered 'no' is the same as those who answered 'not' applicable in the frequency of visits.
+
+After creating a survey design object, taking into account that the sample is divided into strata and uses a simple design alongside weighting, a generalised linear model taking into account survey design was created.
+
+### Interpretation
+
+```{r}
+DCMS$`Life Satisfaction` <- as.numeric(as.character(DCMS$`Life Satisfaction`))
+
+#Survey design object
+dcms_svy <- svydesign(strata = ~MasterStratum2, id=~1, weights = ~finalweight,
+                    nest = TRUE, data=DCMS)
+
+```
+
+```{r}
+model2 <- svyglm(`Life Satisfaction` ~ 
+                   `Age Group`*`Frequency of visit` +
+                   `Financial Situation`*`Frequency of visit`,
+                 design = dcms_svy)
+freq2<-summary(model2)
+model_df2 <- as.data.frame(coef(freq2))
+colnames(model_df2) <- c("Estimate", "Std.Error", "t value", "P value")
+model_df2 %>%
+  kable(digits = 3, format = "html", caption = "Survey-weighted Regression Results for frequency of visiting a historic town/city") %>%
+  kable_styling(full_width = FALSE, bootstrap_options = c("striped","condensed"))
+```
+
+The model's results indicate that younger age groups (25–44, 45–64, and 65–74) report significantly higher life satisfaction compared to the reference category (16–24). However, for those aged 75+, the difference is not statistically significant.
+
+Financial situation plays a big role in life satisfaction. Compared to individuals who are financially comfortable (the reference category), those who are 'just about getting by', 'finding it quite difficult', or 'finding it very difficult' report significantly lower life satisfaction. The size of the negative estimates increases with financial difficulty, suggesting a strong negative relationship between financial hardship and life satisfaction.
+
+While the main effects of frequency of visits to historic towns/cities are not significant on their own, interactions between age group and visit frequency reveal some notable effects. In particular, those aged 75+ who visit historic towns/cities less often than once a month but at least 3 or 4 times a year, twice in the last 12 months, or once in the last 12 months report significantly higher life satisfaction compared to their counterparts who do not visit as frequently. Similarly, for individuals who are "just about getting by" or "finding it quite difficult," visiting at least once a month is associated with significantly higher life satisfaction.
+
+This suggests that the impact of visiting historic towns/cities on life satisfaction depends on both age and financial situation, meaning that certain subgroups may benefit more from these visits than others.
